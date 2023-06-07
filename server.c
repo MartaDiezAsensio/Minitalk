@@ -5,58 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 20:20:56 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/06 21:49:25 by mdiez-as         ###   ########.fr       */
+/*   Created: 2023/06/07 18:58:37 by mdiez-as          #+#    #+#             */
+/*   Updated: 2023/06/07 21:31:41 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <stdio.h>
+#include "header.h"
 
-/*
-The fact that the bit++ is outside the loop implies that the character will not try to print until 
-8 SIGUSR1 are rceived.
-Bit and I need to be static so that the information is not lost everytime a signal is sent. 
-*/
-/*
-ft_btoa will be triggered both when SIGUSR1 and SIGUSR2 are received. But only when SIGUSR1 (that represents 1)
-is received it will copy the positive bit to i.
-bit either way will be incremented to keep track of the bit position. 
-*/
-void	ft_btoa(int sig)
-{
-	static int	bit;
-	static int	i;
+static int	bit = 0;
+static int	c = 0;
 
+void	sig_handler(int sig)
+{	
+	static int	bit = 0;
+	static int	c = 0;
+	
 	if (sig == SIGUSR1)
-		i = i | (0x01 << bit);
-	bit++;
-	if (bit == 8)
+		c = c | (0x01 << bit);
+	if (++bit == 8)
 	{
-		printf("%c", i);
+		printf("%c", c);
 		bit = 0;
-		i = 0;
+		c = 0;
 	}
-
 }
 
 int	main(int argc, char **argv)
 {
 	int	pid;
 
-	(void)argv;
 	if (argc != 1)
 	{
 		printf("Error\n");
 		return (1);
 	}
 	pid = getpid();
-	printf("%d\n", pid);
-	while (argc == 1)
+	printf("PID = %d\n", pid);
+	
+	struct sigaction sa;
+
+	sa.sa_handler = sig_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+
+	if (sigaction(SIGUSR1, &sa, NULL) == -1 || sigaction(SIGUSR2, &sa, NULL) == -1)
 	{
-		signal(SIGUSR1, ft_btoa);
-		signal(SIGUSR2, ft_btoa);
-		pause();
+		printf("Error");
+		return (1);
 	}
+
+	while (1)
+		sleep(1);
 	return (0);
 }
