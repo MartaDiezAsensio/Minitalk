@@ -6,50 +6,11 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:21 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/07 21:23:22 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:37:25 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-// void	send_sig(int pid, char c)
-// {
-// 	int	bit;
-
-// 	bit = 0;
-// 	while (bit < 8)
-// 	{
-// 		if (c & (0x01 << bit))
-// 			kill(pid, SIGUSR1);
-// 		else
-// 			kill(pid, SIGUSR2);
-// 		sleep(500);
-// 		bit++;
-// 	}
-// }
-
-// int	main(int argc, char **argv)
-// {
-// 	int	i;
-// 	int	pid;
-
-// 	i = 0;
-// 	if (argc == 3)
-// 	{
-// 		pid = atoi(argv[1]);
-// 		while (argv[2][i] != '\0')
-// 		{
-// 			send_sig(pid, argv[2][i]);
-// 			i++;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		printf("Error\n");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 void	send_bit(int pid, int bit)
 {
