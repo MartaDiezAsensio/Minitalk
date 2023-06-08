@@ -6,7 +6,7 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:21 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/07 21:37:25 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:19:38 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ int	main(int argc, char **argv)
 		printf("Error\n");
 		return (1);
 	}
-
 	pid = atoi(argv[1]);
-
 	send_str(pid, argv[2]);
-
 	return (0);
 }
