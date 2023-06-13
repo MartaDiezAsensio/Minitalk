@@ -6,7 +6,7 @@
 #    By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 15:49:32 by mdiez-as          #+#    #+#              #
-#    Updated: 2023/06/08 16:19:30 by mdiez-as         ###   ########.fr        #
+#    Updated: 2023/06/13 19:47:24 by mdiez-as         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJS = ${SRCS:.c=.o}
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra
-INCLUDE 	= ./header.h
+INCLUDE 	= ./minitalk.h ./minitalk_bonus.h
 RM = rm -rf
 
 all:	$(NAMEC) $(NAMES)

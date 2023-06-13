@@ -6,7 +6,7 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:21 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/13 18:53:36 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:00:30 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	send_bit(int pid, int bit)
 
 void	send_chr(int pid, char ch)
 {
-	int bit;
+	int	bit;
 
 	bit = 0;
 	while (bit < 8)
@@ -36,8 +36,8 @@ void	send_chr(int pid, char ch)
 
 void	send_str(int pid, const char *str)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = strlen(str);
@@ -52,7 +52,6 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	(void)context;
 	(void)info;
-
 	if (sig == SIGUSR1)
 		write(1, "ACK\n", 4);
 }
@@ -68,16 +67,12 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = atoi(argv[1]);
-
 	sa.sa_sigaction = &sig_handler;
-
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 	{
 		write(1, "Error\n", 6);
 		return (1);
 	}
-
 	send_str(pid, argv[2]);
-
 	return (0);
 }
