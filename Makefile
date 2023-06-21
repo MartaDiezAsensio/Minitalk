@@ -6,41 +6,41 @@
 #    By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 15:49:32 by mdiez-as          #+#    #+#              #
-#    Updated: 2023/06/13 19:47:24 by mdiez-as         ###   ########.fr        #
+#    Updated: 2023/06/21 18:12:08 by mdiez-as         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAMEC = client
-NAMES = server
+SRCS = src/client.c src/server.c
 
-SRCC =	client.c
-SRCS =	server.c
-
-
-OBJC = ${SRCC:.c=.o}
 OBJS = ${SRCS:.c=.o}
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra
-INCLUDE 	= ./minitalk.h ./minitalk_bonus.h
 RM = rm -rf
 
-all:	$(NAMEC) $(NAMES)
+all: $(server) $(client)
 
-%.o : %.c $(INCLUDES)
-	$(CC) $(CFLAG) -c $< -o $@
+bonus: $(server) $(client)
+
+server : server.o printf
+	$(CC) -o $@ $< -Llibftprintf -lftprintf
+
+client : client.o printf
+	$(CC) -o $@ $< -Llibftprintf -lftprintf
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $?
+
+printf:
+	make -C libftprintf
 
 clean :
-		${RM} ${OBJC}
-		${RM} ${OBJS}
+		rm -f $(OBJECTS)
+		make -C libftprintf clean
 
 fclean : clean
-		${RM} $(NAMEC)
-		${RM} $(NAMES)
+		rm -f server client printf/libftprintf
 
 re : fclean all
-
-$(NAME) : $(OBJS) $(OBJC)
-	$(AR) $(ARFLAGS) $@ $^
 
 .PHONY:		all clean fclean re

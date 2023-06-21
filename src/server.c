@@ -6,7 +6,7 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:37 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/13 18:59:53 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:12:56 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	pid = getpid();
-	printf("PID = %d\n", pid);
+	ft_printf("PID = %d\n", pid);
 
 	sa.sa_sigaction = &sig_handler;
 	sigemptyset(&sa.sa_mask);
