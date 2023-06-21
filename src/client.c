@@ -6,12 +6,11 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:21 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/13 19:00:30 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:25:01 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include "minitalk_bonus.h"
+#include "../includes/minitalk.h"
 
 void	send_bit(int pid, int bit)
 {

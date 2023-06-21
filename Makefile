@@ -5,42 +5,52 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/06/08 15:49:32 by mdiez-as          #+#    #+#              #
-#    Updated: 2023/06/21 18:12:08 by mdiez-as         ###   ########.fr        #
+#    Created: 2023/06/21 19:17:14 by mdiez-as          #+#    #+#              #
+#    Updated: 2023/06/21 19:36:28 by mdiez-as         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = src/client.c src/server.c
+NAMEC = client
+NAMES = server
 
+PRINTF = libftprintf.a
+
+SRCC_FILES = client.c
+SRCS_FILES = server.c
+
+SRC_DIR = src/
+SRCC = $(addprefix $(SRC_DIR), $(SRCC_FILES))
+SRCS = $(addprefix $(SRC_DIR), $(SRCS_FILES))
+
+OBJC = ${SRCC:.c=.o}
 OBJS = ${SRCS:.c=.o}
 
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+INCLUDE = -I includes
 RM = rm -rf
 
-all: $(server) $(client)
+all: $(NAMEC) $(NAMES)
 
-bonus: $(server) $(client)
+$(NAMEC): $(OBJC)
+	@make -C ft_printf
+	$(CC) $(CFLAGS) $(OBJC) $(INCLUDE) ft_printf/$(PRINTF) -o $(NAMEC)
 
-server : server.o printf
-	$(CC) -o $@ $< -Llibftprintf -lftprintf
+$(NAMES): $(OBJS)
+	@make -C ft_printf
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) ft_printf/$(PRINTF) -o $(NAMES)
 
-client : client.o printf
-	$(CC) -o $@ $< -Llibftprintf -lftprintf
+clean:
+	@make clean -C ft_printf
+	$(RM) $(OBJC)
+	$(RM) $(OBJS)
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) $?
+fclean: clean
+	@make fclean -C ft_printf
+	$(RM) $(NAMEC)
+	$(RM) $(NAMES)
+	$(RM) $(PRINTF)
 
-printf:
-	make -C libftprintf
+re: fclean all
 
-clean :
-		rm -f $(OBJECTS)
-		make -C libftprintf clean
-
-fclean : clean
-		rm -f server client printf/libftprintf
-
-re : fclean all
-
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re

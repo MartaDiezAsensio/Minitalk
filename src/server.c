@@ -6,7 +6,7 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:37 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/21 18:12:56 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:24:57 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 	are automatically restarted (SA_RESTART).
 */
 
-#include "minitalk.h"
-#include "minitalk_bonus.h"
+#include "../includes/minitalk.h"
 
 static void sig_handler(int sig, siginfo_t *info, void *context)
 {
