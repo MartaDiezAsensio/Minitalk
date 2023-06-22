@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:21 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/22 12:58:23 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/06/22 13:31:05 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../includes/minitalk_bonus.h"
 
 void	send_bit(int pid, int bit)
 {
@@ -47,6 +47,14 @@ void	send_str(int pid, const char *str)
 	}
 }
 
+static void	sig_handler(int sig, siginfo_t *info, void *context)
+{
+	(void)context;
+	(void)info;
+	if (sig == SIGUSR1)
+		write(1, "ACK\n", 4);
+}
+
 int	main(int argc, char **argv)
 {
 	int					pid;
@@ -58,7 +66,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = atoi(argv[1]);
-
+	sa.sa_sigaction = &sig_handler;
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 	{
 		write(1, "Error\n", 6);
