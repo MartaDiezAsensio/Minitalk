@@ -6,13 +6,13 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:37 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/22 12:59:20 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:58:33 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-static void sig_handler(int sig)
+static void	sig_handler(int sig)
 {
 	static int	bit = 0;
 	static int	c = 0;
@@ -29,7 +29,7 @@ static void sig_handler(int sig)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int					pid;
 	struct sigaction	sa;
@@ -42,7 +42,6 @@ int main(int argc, char **argv)
 	}
 	pid = getpid();
 	ft_printf("PID = %d\n", pid);
-
 	sa.sa_handler = sig_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;

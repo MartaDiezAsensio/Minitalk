@@ -6,7 +6,7 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:21:15 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/05/24 18:51:45 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:57:14 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_putdigits(int n)
 		if (ft_putchar('0' + n) == -1)
 			return (-1);
 		i++;
-	}	
+	}
 	return (i);
 }
 

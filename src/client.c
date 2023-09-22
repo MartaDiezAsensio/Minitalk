@@ -6,7 +6,7 @@
 /*   By: mdiez-as <mdiez-as@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:58:21 by mdiez-as          #+#    #+#             */
-/*   Updated: 2023/06/22 12:58:23 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:59:28 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = atoi(argv[1]);
-
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 	{
 		write(1, "Error\n", 6);
